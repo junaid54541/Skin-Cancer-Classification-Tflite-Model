@@ -1,19 +1,6 @@
 # Skin-Cancer-Classification-Tflite-Model
 skin cancer classification Tensorflow Lite model which can be integrated on Android and ios
 
-Changes made in version 3
-
-Added a Classification Report.
-Added some text explaining the terms Precison, Recall and F1 score.
-Introduction
-
-I've always wanted to build an end to end ml solution - starting with model creation and ending with a live web app. Here I've managed to do it. Users are able to submit a picture of a skin lesion and get an instant prediction. This kernel details the process I followed to build the model and then convert it from Keras to Tensorflow.js. The javascript, html and css code for the app is available on github. 
-
-Web App:
-http://skin.test.woza.work/
-Github: 
-https://github.com/vbookshelf/Skin-Lesion-Analyzer
-
 This model classifies skin lesions into seven classes. It is a fine tuned MobileNet CNN. All training was done in this kernel. The main challenges were the unbalanced dataset and the small amount of data. I used data augmentation to reduce the class imbalance and in so doing get categorical accuracy scores that were not heavily skewed by a single majority class.
 
 MobileNet’s small size and speed makes it ideal for web deployment. It’s also a joy to train.
@@ -28,32 +15,6 @@ This is the objective that I defined for this task:
 
 Create an online tool that can tell doctors and lab technologists the three highest probability diagnoses for a given skin lesion. This will help them quickly identify high priority patients and speed up their workflow. The app should produce a result in less than 3 seconds. To ensure privacy the images must be pre-processed and analysed locally and never be uploaded to an external server.
 
-from numpy.random import seed
-seed(101)
-from tensorflow import set_random_seed
-set_random_seed(101)
-
-import pandas as pd
-import numpy as np
-#import keras
-#from keras import backend as K
-
-import tensorflow
-from tensorflow.keras.layers import Dense, Dropout
-from tensorflow.keras.optimizers import Adam
-from tensorflow.keras.metrics import categorical_crossentropy
-from tensorflow.keras.preprocessing.image import ImageDataGenerator
-from tensorflow.keras.models import Model
-from tensorflow.keras.callbacks import EarlyStopping, ReduceLROnPlateau, ModelCheckpoint
-
-import os
-
-from sklearn.metrics import confusion_matrix
-from sklearn.model_selection import train_test_split
-import itertools
-import shutil
-import matplotlib.pyplot as plt
-%matplotlib inline
 LABELS
 
 Excerpts from the paper:
